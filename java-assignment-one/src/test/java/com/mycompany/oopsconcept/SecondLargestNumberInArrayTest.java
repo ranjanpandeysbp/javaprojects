@@ -13,7 +13,7 @@ public class SecondLargestNumberInArrayTest {
         secondLargestNumberInArray = new SecondLargestNumberInArray();
     }
 
-    @Test
+    @Test(description = "The 2nd largest number was found correctly")
     public void testFindSecondLargest() {
         int[] numbers = {11, 15, 8, 20, 12, 17, 25};
         int expectedSecondLargest = 20;
