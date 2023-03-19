@@ -1,0 +1,27 @@
+Generic Method
+In this exercise you will write an application that uses Generic method.
+Generic methods have a type parameter (the diamond operator enclosing the type)
+before the return type of the method declaration.
+
+Create a class GenericExample and add the generic method to the class.
+
+public class GenericExample {
+    public <T> T genericMethod(T parameter) {
+        return parameter;
+    }
+}
+
+Now create a Main class. Instantiate the object for GenericExample.
+
+public class Main {
+    public static void main(String[] args){
+        System.out.println("Generic method");
+        System.out.println(genericExample.genericMethod(10));
+        //Generic method for String as parameter
+        System.out.println(genericExample.genericMethod("Hello"));
+    }
+}
+
+
+
+

@@ -1,0 +1,70 @@
+Constructor chaining
+In this exercise you will write an application that uses constructor chaining.
+The application will set the variables of an object using constructor chaining.
+
+Create a class ConstructorChaining and add two class attributes.
+1. name with datatype String
+2. age with datatype int
+
+Create the getters for the attributes.
+
+public class ConstructorChaining {
+    private String name;
+    private int age;
+
+    public int getAge() {
+            return age;
+        }
+
+    public String getName() {
+        return name;
+    }
+
+}
+
+Now create a parametrized constructor which sets only the name.
+
+public class ConstructorChaining {
+    private String name;
+    private int age;
+
+    public ConstructorChaining(String name) {
+            this.name = name;
+        }
+}
+
+Now create another parametrized constructor which takes two parameters name and age.
+Here only set the age to the class attribute and set the name using the constructor defined previously.
+
+public class ConstructorChaining {
+    private String name;
+    private int age;
+
+    public ConstructorChaining(String name) {
+            this.name = name;
+    }
+
+    public ConstructorChaining(String name, int age) {
+            this(name);
+            this.age = age;
+    }
+}
+
+Notice how the constructor is called using this(name) from another constructor.
+This is constructor chaining where one constructor is called from another constructor.
+
+Now create a Main class. Instantiate the object for ConstructorChaining passing name and age as parameters.
+Print the name and age.
+
+public class Main {
+    public static void main(String[] args){
+        System.out.println("Constructor chaining sets the name and age parameter");
+        ConstructorChaining constructorChaining = new ConstructorChaining("John", 25);
+        System.out.println("Name is : " + constructorChaining.getName());
+        System.out.println("Age is : " + constructorChaining.getAge());
+    }
+}
+
+
+
+

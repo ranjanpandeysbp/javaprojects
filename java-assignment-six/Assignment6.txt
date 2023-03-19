@@ -1,0 +1,161 @@
+Create a Java program that demonstrates various techniques for handling exceptions.
+The program should include the following:
+
+Create a custom exception called "NegativeNumberException" that extends the Exception class.
+This exception should be thrown when a negative number is encountered.
+
+public class NegativeNumberException extends Exception {
+    public NegativeNumberException(String message) {
+        super(message);
+    }
+}
+
+Create a class called "Calculator" that has the following methods:
+
+This method should divide two integers and return the result.
+It should throw an ArithmeticException if the second argument is zero.
+
+public static int divide(int a, int b) throws ArithmeticException {
+        if (b == 0) {
+            throw new ArithmeticException("Denominator cannot be zero");
+        }
+        return a / b;
+    }
+
+
+This method should calculate the square root of an integer and return the result.
+It should throw a NegativeNumberException if the argument is negative.
+
+public static int squareRoot(int a) throws NegativeNumberException {
+        if (a < 0) {
+            throw new NegativeNumberException("Number cannot be negative");
+        }
+        return (int) Math.sqrt(a);
+    }
+
+Create a class called "ExceptionHandler" that has the following methods:
+
+This method should demonstrate how to catch and handle an ArithmeticException.
+public static void handleArithmeticException() {
+        try {
+            int result = Calculator.divide(10, 0);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Caught ArithmeticException: " + e.getMessage());
+        }
+    }
+
+
+This method should demonstrate how to catch and handle a NegativeNumberException.
+
+public static void handleNegativeNumberException() {
+        try {
+            int result = Calculator.squareRoot(-10);
+            System.out.println("Result: " + result);
+        } catch (NegativeNumberException e) {
+            System.out.println("Caught NegativeNumberException: " + e.getMessage());
+        }
+    }
+
+
+This method should demonstrate how to catch and handle multiple exceptions.
+
+public static void handleMultipleExceptions() {
+        try {
+            int result1 = Calculator.divide(10, 0);
+            System.out.println("Result1: " + result1);
+
+            int result2 = Calculator.squareRoot(-10);
+            System.out.println("Result2: " + result2);
+        } catch (ArithmeticException | NegativeNumberException e) {
+            System.out.println("Caught exception: " + e.getMessage());
+        }
+    }
+
+
+This method should demonstrate how to rethrow an exception.
+
+public static void rethrowException() throws NegativeNumberException {
+        try {
+            int result = Calculator.squareRoot(-10);
+            System.out.println("Result: " + result);
+        } catch (NegativeNumberException e) {
+            System.out.println("Caught NegativeNumberException: " + e.getMessage());
+            throw e;
+        }
+    }
+
+Create a main class called "Main" that uses the methods from the Calculator and ExceptionHandler
+classes to perform the following tasks:
+
+Call the divide method with a zero as the second argument and catch the resulting ArithmeticException.
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            int result = Calculator.divide(10, 0);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException ex) {
+            System.out.println("Exception caught: " + ex.getMessage());
+        }
+    }
+}
+
+Call the squareRoot method with a negative number and catch the resulting NegativeNumberException.
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            int result = Calculator.squareRoot(-10);
+            System.out.println("Result: " + result);
+        } catch (NegativeNumberException ex) {
+            System.out.println("Exception caught: " + ex.getMessage());
+        }
+    }
+}
+
+Call the divide and squareRoot methods in a try-catch block that catches both ArithmeticException and
+NegativeNumberException.
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            int result = Calculator.divide(10, 2);
+            System.out.println("Result: " + result);
+            int sqrtResult = Calculator.squareRoot(-10);
+            System.out.println("Square root result: " + sqrtResult);
+        } catch (ArithmeticException | NegativeNumberException ex) {
+            System.out.println("Exception caught: " + ex.getMessage());
+        }
+    }
+}
+
+Call the rethrowException method and catch the resulting NegativeNumberException.
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            ExceptionHandler.rethrowException();
+        } catch (NegativeNumberException ex) {
+            System.out.println("Exception caught: " + ex.getMessage());
+        }
+    }
+}
+
+Call the handleArithmeticException, handleNegativeNumberException, and handleMultipleExceptions methods
+from the ExceptionHandler class.
+
+public class Main {
+
+    public static void main(String[] args) {
+        ExceptionHandler.handleArithmeticException();
+        ExceptionHandler.handleNegativeNumberException();
+        ExceptionHandler.handleMultipleExceptions();
+    }
+}
+
+

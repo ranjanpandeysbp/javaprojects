@@ -1,0 +1,31 @@
+In this exercise you will write an application that will find the second largest number in array.
+
+Create a class SecondLargestNumberInArray.
+Create a method which will have the logic to find the second largest number in an array.
+
+public class SecondLargestNumberInArray {
+
+    public int findSecondLargest(int[] numbers) {
+        Arrays.sort(numbers);
+        return numbers[numbers.length - 2];
+    }
+}
+
+Now create a Main class. Instantiate the object for SecondLargestNumberInArray.
+Create an integer array with numbers.
+
+public class Main {
+
+    public static void main(String[] args){
+
+        SecondLargestNumberInArray secondLargestNumberInArray = new SecondLargestNumberInArray();
+        int[] numbers = {11, 15, 8, 20, 12, 17, 25};
+        int actualSecondLargest = secondLargestNumberInArray.findSecondLargest(numbers);
+        System.out.println("The second largest number is: "+actualSecondLargest);
+    }
+}
+
+
+
+
+

@@ -12,30 +12,10 @@ public class AssignmentThreeTest {
         example = new AssignmentThree("John", 25);
     }
 
-    @Test(description = "Tests if the constructor sets the name and age correctly.")
-    public void testConstructor() {
-        Assert.assertEquals(example.getName(), "John");
-        Assert.assertEquals(example.getAge(), 25);
-    }
-
-    @Test(description = "Tests if the setAge method updates the age correctly.")
-    public void testSetAge() {
-        example.setAge(30);
-        Assert.assertEquals(example.getAge(), 30);
-    }
-
     @Test(description = "Tests if the toString method returns the expected string.")
     public void testToString() {
         String expectedString = "AssignmentThree{name='John', age=25}";
         Assert.assertEquals(example.toString(), expectedString);
-    }
-
-    @Test(description = "Tests if the genericMethod method returns the expected result when passed an integer.")
-    public void testGenericMethod() {
-        int parameter = 10;
-        int expectedResult = 10;
-        int result = example.genericMethod(parameter);
-        Assert.assertEquals(result, expectedResult);
     }
 
     @Test(description = "Tests the finalMethod method.")
@@ -46,7 +26,7 @@ public class AssignmentThreeTest {
     @Test(description = "Tests the nonFinalMethod method.")
     public void testNonFinalMethod() {
         AssignmentThree child = new AssignmentThree("Jane", 30);
-        child.nonFinalMethod();
+        child.overloadMethod();
     }
 
     @Test(description = "Test getInstanceCount method returns the expected result.")

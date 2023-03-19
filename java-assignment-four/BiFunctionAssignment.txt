@@ -1,0 +1,52 @@
+In this example, we create a BiFunction interface named combineStrings
+that takes two strings as input and returns a combined string with a space in between.
+We use the apply method of the BiFunction to combine the two strings "Hello" and "World"
+into a single string "Hello World".
+
+Create a new Java class named BiFunctionExample.Inside the class, create a method combineStrings
+which takes two String parameters and return type as String.
+
+public class BiFunctionExample {
+    public String combineStrings(String str1, String str2) {
+
+    }
+}
+
+Create a BiFunction variable named combineStrings and initialize it with a lambda expression that
+takes two String parameters and returns a String with a space in between the two input strings.
+
+public class BiFunctionExample {
+    public String combineStrings(String str1, String str2) {
+
+        // create a BiFunction to combine two strings with a space in between
+        BiFunction<String, String, String> combineStrings = (s1, s2) -> s1 + " " + s2;
+    }
+}
+
+Use the apply method of the BiFunction variable to combine the two input strings and store the
+result in a String variable named combined and return the combined string variable.
+
+public class BiFunctionExample {
+    public String combineStrings(String str1, String str2) {
+
+        // create a BiFunction to combine two strings with a space in between
+        BiFunction<String, String, String> combineStrings = (s1, s2) -> s1 + " " + s2;
+
+        // use the BiFunction to combine two strings
+        String combined = combineStrings.apply(str1, str2);
+
+        return combined;
+    }
+}
+
+Create a Main class and instantiate the object.
+Call the method and pass two strings and see the concatenated string.
+
+public class Main {
+    public static void main(String[] args) {
+        BiFunctionExample biFunctionExample = new BiFunctionExample();
+        // print the combined string
+        System.out.println(biFunctionExample.combineStrings("Hi", "I am your friend."));
+
+    }
+}

@@ -1,0 +1,56 @@
+In this example, we create a list of strings and use a Function interface
+to convert each word in the list to uppercase.
+
+Create a class FunctionExample.
+Create a Function named toUpperCase that takes a string and returns the uppercase version
+of that string using the toUpperCase method.
+
+public class FunctionExample {
+
+    public static <T, R> List<R> convertList(List<T> list, Function<T, R> function) {
+        return list.stream().map(function).collect(Collectors.toList());
+    }
+}
+
+
+
+Create a method convertUpperCase which
+takes a List<Strings> as parameter and returns a List<String>.
+Call the Function that converts the list of strings to uppercase.
+
+public class FunctionExample {
+
+    public List<String> convertUpperCase(List<String> words) {
+        // create a function to convert a string to uppercase
+        Function<String, String> toUpperCase = String::toUpperCase;
+
+        // use the function to convert each word in the list to uppercase
+        List<String> upperCaseWords = convertList(words, toUpperCase);
+
+        // print the original list
+        System.out.println("Original List: " + words);
+        return upperCaseWords;
+    }
+
+    public static <T, R> List<R> convertList(List<T> list, Function<T, R> function) {
+        return list.stream().map(function).collect(Collectors.toList());
+    }
+}
+
+We use the convertList method to apply the toUpperCase function to each element in the list of words.
+The convertList method takes two parameters - a list of type T and a Function that converts each element
+of type T to a result of type R. It uses the map method of the Stream interface to apply the Function
+to each element of the list and return a new list of type R.
+
+In the Main class instantiate the object for FunctionExample. Create a list of words and
+pass as parameter while calling the method.
+
+public class Main {
+    public static void main(String[] args) {
+
+        // create a list of strings
+        List<String> words = Arrays.asList("apple", "banana", "cherry", "date");
+        FunctionExample functionExample = new FunctionExample();
+        System.out.println("Uppercase List: " + functionExample.convertUpperCase(words));
+    }
+}

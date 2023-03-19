@@ -1,0 +1,49 @@
+This is a Java class named ConsumerDemo that demonstrates the use of the Consumer functional interface.
+The class has a single public method named consumerDemoMethod that takes a list of integers as input
+and returns the list of integers after adding 10 to each item.
+
+
+Create a class ConsumerDemo which contains a method consumerDemoMethod
+method takes a list of integers named numbers as input and returns the same list of integers.
+
+public class ConsumerDemo {
+    public List<Integer> consumerDemoMethod(List<Integer> numbers){
+        // create a consumer to add 10 to each number in the list
+
+        // use the consumer to modify the list of numbers
+    }
+}
+
+Create a Consumer named addTen that adds 10 to each number in the list and
+prints out the modified number. Then use the forEach method of the List interface to apply
+the addTen consumer to each element of the list.
+
+public class ConsumerDemo {
+    public List<Integer> consumerDemoMethod(List<Integer> numbers){
+        // create a consumer to add 10 to each number in the list
+        Consumer<Integer> addTen = number -> {
+            number += 10;
+            System.out.print(number + " ");
+        };
+
+        // use the consumer to modify the list of numbers
+        System.out.print("Original List: ");
+        numbers.forEach(addTen);
+        return numbers;
+    }
+}
+
+Create a Main class and instantiate the ConsumerDemo class.
+Create a list of integers and pass in the method call consumerDemoMethod.
+
+public class Main {
+    public static void main(String[] args) {
+        ConsumerDemo consumerDemo = new ConsumerDemo();
+        // create a list of integers
+        List<Integer> numbers = new ArrayList<>();
+        numbers.add(1);
+        numbers.add(2);
+        numbers.add(3);
+        consumerDemo.consumerDemoMethod(numbers);
+    }
+}

@@ -1,0 +1,200 @@
+Let's consider a real-life scenario where we need to design a billing system for a retail store
+that sells different types of products. The billing system should be able to calculate the total
+bill amount and provide a discount on the total bill amount based on the type of products and
+the quantity of products purchased by the customer.
+
+Solution:
+Design a solution to this problem statement using object-oriented programming principles.
+Here is a possible solution design:
+
+1.Create an interface named Product with the following methods:
+
+getProductName() to get the name of the product
+getProductPrice() to get the price of the product
+getProductType() to get the type of the product (e.g. Electronics, Clothing, Food, etc.)
+
+public interface Product {
+    public String getProductName();
+    public double getProductPrice();
+    public String getProductType();
+}
+
+2.Create an abstract class named Item that implements the Product interface and
+has the following properties:
+
+productName (final and private) to store the name of the product
+productPrice (final and private) to store the price of the product
+productType (final and private) to store the type of the product
+quantity (private) to store the quantity of the product purchased by the customer
+getItemTotal() (public) to calculate the total amount of the product purchased by the customer
+
+public abstract class Item implements Product {
+    private final String productName;
+    private final double productPrice;
+    private final String productType;
+    private int quantity;
+
+    public Item(String productName, double productPrice, String productType, int quantity) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productType = productType;
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String getProductName() {
+        return productName;
+    }
+
+    @Override
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    @Override
+    public String getProductType() {
+        return productType;
+    }
+
+    public abstract double getItemTotal();
+}
+
+3.Create concrete classes that extend the Item abstract class to represent different types of products,
+such as ElectronicsItem, ClothingItem, FoodItem, etc.
+Each of these classes should provide implementations for the
+getProductName(),
+getProductPrice(), and
+getProductType() methods of the Product interface.
+
+public class ElectronicsItem extends Item {
+    public ElectronicsItem(String productName, double productPrice, int quantity) {
+        super(productName, productPrice, "Electronics", quantity);
+    }
+
+    @Override
+    public double getItemTotal() {
+        return getQuantity() * getProductPrice();
+    }
+}
+
+public class FoodItem extends Item {
+    public FoodItem(String productName, double productPrice, int quantity) {
+        super(productName, productPrice, "Food", quantity);
+    }
+
+    @Override
+    public double getItemTotal() {
+        return getQuantity() * getProductPrice();
+    }
+}
+
+public class ClothingItem extends Item {
+    public ClothingItem(String productName, double productPrice, int quantity) {
+        super(productName, productPrice, "Clothing", quantity);
+    }
+
+    @Override
+    public double getItemTotal() {
+        return getQuantity() * getProductPrice();
+    }
+}
+
+4. Create a Discount enum to represent the different types of discounts that can be applied to the
+total bill amount.
+
+public enum Discount {
+    FIVE_PERCENT(0.05),
+    TEN_PERCENT(0.1),
+    FIFTEEN_PERCENT(0.15);
+
+    private final double discountRate;
+
+    private Discount(double discountRate) {
+        this.discountRate = discountRate;
+    }
+
+    public double getDiscountRate() {
+        return discountRate;
+    }
+}
+
+5. Create a Bill class with the following properties:
+
+   items (private) to store the list of items purchased by the customer
+   totalAmount (private) to store the total bill amount
+   discount (private) to store the discount applied to the total bill amount
+   getTotalAmount() (public) to calculate the total bill amount based on the quantity and price of each item purchased by the customer
+   applyDiscount() (public) to apply a discount to the total bill amount based on the type and quantity of items purchased by the customer
+
+public class Bill {
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    private List<Item> items = new ArrayList<>();
+    private double totalAmount;
+    private double discountedAmount;
+
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
+    public void applyDiscount(int totalQuantity) {
+        double discountPercentage = 0.0;
+
+        if (totalQuantity >= 10) {
+            discountPercentage = 0.1;
+        } else if (totalQuantity >= 5) {
+            discountPercentage = 0.05;
+        }
+
+        double total = 0.0;
+
+        for (Item item : items) {
+            total += item.getProductPrice() * item.getQuantity();
+        }
+
+        totalAmount = total;
+
+        double discountAmount = total * discountPercentage;
+        discountedAmount = total - discountAmount;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public double getDiscountedAmount() {
+        return discountedAmount;
+    }
+}
+
+
+By using this solution design, we can create a flexible and scalable billing system that can
+handle different types of products and discounts.
+We also use encapsulation and abstraction to hide the internal details of the system and
+provide a clean and simple interface for the user.
+
+The Main class interacts with the user to get the necessary input and creates Item objects based on
+the category.
+It then adds these Item objects to a Bill object, which is used to calculate the total amount,
+apply discounts, and print the final bill.
+
+
+
+Overall, this implementation is more modular and easier to maintain,
+as each class has a specific responsibility and can be modified or extended without
+affecting the other classes.
+

@@ -1,0 +1,44 @@
+The PredicateDemo class is a Java class that demonstrates the use of a functional interface called Predicate.
+The class has a single public method named drivingCheck that takes an integer inputAge as input and returns
+a boolean value that indicates whether the age is above or below 18.
+
+
+Create a class PredicateDemo which contains a method drivingCheck.
+The drivingCheck method takes an integer value named inputAge as input
+and returns a boolean value that indicates whether the age is above or below 18.
+
+A Predicate variable named drivingAllowedOrNot is created using a lambda expression that takes an integer value as input
+and returns a boolean value indicating whether the age is greater than or equal to 18.
+The test method of the Predicate interface is used to test whether the inputAge is greater than or equal to 18.
+
+
+public class PredicateDemo {
+
+    public boolean drivingCheck(Integer inputAge){
+
+        boolean isDrivingAllowed = false;
+
+        Predicate<Integer> drivingAllowedOrNot = age -> age >= 18;
+
+        isDrivingAllowed = drivingAllowedOrNot.test(inputAge);
+        if(isDrivingAllowed){
+            System.out.println("You are allowed to Drive");
+        }else {
+            System.out.println("You are not allowed to Drive");
+        }
+
+        return isDrivingAllowed;
+    }
+
+Create a Main class and instantiate the PredicateDemo class.
+Use the Scanner class to take the age as input from the user. Once the user enters the age call the drivingCheck
+method to check if its allowed for driving.
+
+public class Main {
+    public static void main(String[] args) {
+        PredicateDemo pd = new PredicateDemo();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your age");
+        pd.drivingCheck(scanner.nextInt());
+    }
+}

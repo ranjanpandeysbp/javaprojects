@@ -1,0 +1,37 @@
+In this example, a class named FunctionalInterfaceDemo that demonstrates the use of a
+functional interface called Circle. The class has a single public method named areaCircle
+that takes a double value as the radius of a circle and returns the area of that circle as a double.
+
+Create an interface Circle and a method declaration for area which takes radius and return double.
+Annotate with @FunctionalInterface.
+
+@FunctionalInterface
+interface Circle {
+    double area(double radius);
+}
+
+Create a new Java class named FunctionalInterfaceDemo.Inside the class, create a method areaCircle
+which takes radius as input and return type as double.
+Give the method definition of the Circle interface in the class. Here we are trying to calculate the
+area of the circle which is 3.14(pi) * r* r.
+Call the method defined in interface with radius.
+
+public class FunctionalInterfaceDemo {
+    public double areaCircle(double radiusInput){
+        Circle c = r -> 3.14 * r * r;
+        return c.area(radiusInput);
+    }
+}
+
+
+Create a Main class and instantiate the object.
+Call the method and pass radius and see the area of circle returned as result.
+
+public class Main {
+    public static void main(String[] args) {
+        FunctionalInterfaceDemo functionalInterfaceDemo = new FunctionalInterfaceDemo();
+        double areaOfCircle = functionalInterfaceDemo.areaCircle(5);
+        System.out.println("Area of circle is " + areaOfCircle);
+
+    }
+}

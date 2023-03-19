@@ -1,0 +1,114 @@
+Method chaining
+In this exercise you will write an application that uses method chaining.
+The application will set the variables of an object using constructor chaining.
+
+Create a class AssignmentThree and add two class attributes.
+1. name with datatype String
+2. age with datatype int
+
+Create the getters for the attributes.
+
+public class AssignmentThree {
+    private String name;
+    private int age;
+
+    public int getAge() {
+            return age;
+        }
+
+    public String getName() {
+        return name;
+    }
+
+}
+
+Now create a parametrized constructor which sets the name and age.
+
+public class MethodChaining {
+    private String name;
+    private int age;
+
+    public ConstructorChaining(int age) {
+           this.name = name;
+           this.age = age;
+    }
+}
+
+Now create a method that sets the age and returns the object i.e MethodChaining.
+Here set the age to the class attribute and set the name using the constructor defined previously.
+Also create the getter methods to access the class variables.
+
+public class MethodChaining {
+    private String name;
+    private int age;
+
+    public MethodChaining(String name, int age) {
+            this.name = name;
+            this.age = age;
+    }
+
+    public String getName() {
+            return name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+}
+
+Now create a method setAge to set the age of the class variable.
+
+public class MethodChaining {
+    private String name;
+    private int age;
+
+    public MethodChaining(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public MethodChaining setAge(int age) {
+        this.age = age;
+        return this;
+    }
+}
+
+Create another method which prints the name and age.
+
+public class MethodChaining {
+    private String name;
+    private int age;
+
+    public MethodChaining(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public MethodChaining setAge(int age) {
+        this.age = age;
+        return this;
+    }
+
+    public void printInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+}
+
+Now create a Main class. Instantiate the object for MethodChaining passing name and age as parameters.
+Print the name and age.
+
+public class Main {
+    public static void main(String[] args){
+        MethodChaining methodChaining = new MethodChaining("John", 25);
+        //Method chaining
+        System.out.println("Method Chaining");
+        methodChaining.setAge(40).printInfo();
+    }
+}
+
+Notice the way the methods are called setAge(40) and the printInfo() which prints the result.
+
+
+
+

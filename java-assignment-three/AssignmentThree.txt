@@ -1,0 +1,154 @@
+AssignmentThree
+In this exercise you will learn about static keyword, overloading and overriding and final methods.
+
+Create a class AssignmentThree and add a static class attribute.Add also the attribute name and age.
+Make the name attribute as final.
+
+public class AssignmentThree {
+    private static int instanceCounter = 0;
+    private final String name;
+    private int age;
+}
+
+Create a constructor which sets the name and increments the instanceCounter.
+Create another constructor which sets the age and name by using constructor chaining.
+
+public class AssignmentThree {
+    private static int instanceCounter = 0;
+    private final String name;
+    private int age;
+
+    public AssignmentThree(String name) {
+        this.name = name;
+        instanceCounter++;
+    }
+
+    //Constructor chaining
+    public AssignmentThree(String name, int age) {
+        this(name);
+        this.age = age;
+    }
+}
+
+Create a static method that returns the value of the instanceCounter.
+
+public static int getInstanceCount() {
+        return instanceCounter;
+    }
+
+
+Now create a Main class. Instantiate the object for AssignmentThree.
+Notice how the static method is called.
+
+public class Main {
+    public static void main(String[] args){
+        AssignmentThree assignmentThree = new AssignmentThree("John", 25);
+
+        //Static method call
+        System.out.println("Static method call counter" + AssignmentThree.getInstanceCount());
+    }
+}
+
+Final method
+We already know that final is a keyword can be used at method level and attribute level.
+Check how we have defined the name as final.
+To create a final method using final keyword.
+
+public final void finalMethod() {
+        System.out.println("This method is final.");
+    }
+
+In the Main class call the final method using the instantiated object.
+
+public class Main {
+    public static void main(String[] args){
+        AssignmentThree assignmentThree = new AssignmentThree("John", 25);
+
+        //Static method call
+        System.out.println("Static method call counter" + AssignmentThree.getInstanceCount());
+
+        //Final method call
+                System.out.println("Final method call");
+                assignmentThree.finalMethod();
+    }
+}
+
+Method Overloading is the concept where the same method name is used but the parameters are different.
+Overloading a method - create two methods in AssignmentThree with same name but different parameters.
+
+public void overloadMethod() {
+        System.out.println("overloadMethod() :This method is overloaded.");
+    }
+
+public void overloadMethod(String greetings) {
+    System.out.println("overloadMethod(String greetings) :This method is overloaded.");
+    System.out.println(greetings);
+}
+
+From the Main class call the overloadMethod.
+
+public class Main {
+    public static void main(String[] args){
+        AssignmentThree assignmentThree = new AssignmentThree("John", 25);
+
+        //Static method call
+        System.out.println("Static method call counter" + AssignmentThree.getInstanceCount());
+
+        //Final method call
+        System.out.println("Final method call");
+        assignmentThree.finalMethod();
+    }
+
+        //Overloaded method calls
+        System.out.println("Overloaded method calls");
+        assignmentThree.overloadMethod();
+        assignmentThree.overloadMethod("Hello there!!");
+}
+
+Method override - occurs when a subclass provides a particular implementation of a
+method declared by one of its parent classes. In this case we will override toString() method in the
+Object class in our AssignmentThree class.
+
+Add a method in AssignmentThree class with @Override annotation.
+
+public class AssignmentThree {
+    // Method overriding
+    @Override
+    public String toString() {
+        return "AssignmentThree{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+Now from the Main class call the toString() method.
+
+public class Main {
+    public static void main(String[] args){
+        AssignmentThree assignmentThree = new AssignmentThree("John", 25);
+
+        //Static method call
+        System.out.println("Static method call counter" + AssignmentThree.getInstanceCount());
+
+        //Final method call
+        System.out.println("Final method call");
+        assignmentThree.finalMethod();
+    }
+
+        //Overloaded method calls
+        System.out.println("Overloaded method calls");
+        assignmentThree.overloadMethod();
+        assignmentThree.overloadMethod("Hello there!!");
+
+        //Overridden method call
+        System.out.println("Overridden method call");
+        System.out.println(assignmentThree.toString());
+}
+
+
+
+
+
+
+
