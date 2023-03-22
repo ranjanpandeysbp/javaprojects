@@ -1,0 +1,83 @@
+Objective:
+The purpose of this assignment is to provide an introduction to threads and their life cycle.
+In addition, learners will learn about interthread communication and synchronization through various
+scenarios, including ticket booking.
+
+The TicketBookingSystem class represents the ticket booking system,
+and is responsible for keeping track of available seats and booking seats.
+It uses a Lock object to synchronize access to the shared availableSeats list.
+
+Create a class with name TicketBookingSystem which has a list of Integers with availableSeats and a Lock object.
+Create a constructor which takes the number of seats as input and loops through them and add each seat to the
+available seats.
+Create a method bookSeat() which allocates the seat for that seat number.
+
+public class TicketBookingSystem {
+
+    private List<Integer> availableSeats = new ArrayList<>();
+    private Lock lock = new ReentrantLock();
+
+    public TicketBookingSystem(int numSeats) {
+        for (int i = 1; i <= numSeats; i++) {
+            availableSeats.add(i);
+        }
+    }
+
+    public int bookSeat() {
+        lock.lock();
+        try {
+            if (availableSeats.isEmpty()) {
+                return -1; // indicates no available seats
+            }
+            int seatNumber = availableSeats.remove(0);
+            System.out.println("Seat " + seatNumber + " booked by thread " + Thread.currentThread().getId());
+            return seatNumber;
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+
+The User class represents a user of the ticket booking system, and is responsible for booking a seat.
+Each User object is associated with a TicketBookingSystem object, which it uses to book a seat.
+The run() method of the User class calls the bookSeat() method of the associated TicketBookingSystem object,
+and prints a message indicating whether the seat was booked successfully or not.
+
+public class User extends Thread {
+    private TicketBookingSystem ticketBookingSystem;
+
+    public User(TicketBookingSystem ticketBookingSystem) {
+        this.ticketBookingSystem = ticketBookingSystem;
+    }
+
+    public void run() {
+        int seatNumber = ticketBookingSystem.bookSeat();
+        if (seatNumber == -1) {
+            System.out.println("Thread " + Thread.currentThread().getId() + " could not book a seat.");
+        }
+    }
+}
+
+
+The Main class is the main class of the program. It creates a TicketBookingSystem object with 10 seats,
+and creates 20 User objects, each associated with the TicketBookingSystem object.
+Each User object is started as a separate thread, and attempts to book a seat in the run() method.
+
+public class Main {
+    public static void main(String[] args) {
+        TicketBookingSystem ticketBookingSystem = new TicketBookingSystem(10);
+        for (int i = 0; i < 20; i++) {
+            User user = new User(ticketBookingSystem);
+            user.start();
+        }
+    }
+}
+
+When the program is run, the User threads will execute concurrently, attempting to book seats in the
+TicketBookingSystem. The Lock object in the TicketBookingSystem ensures that only one thread can access
+the availableSeats list at a time, and the synchronized keyword is not used because Lock provides more
+fine-grained control over locking and unlocking. If a seat is successfully booked, a message is printed
+indicating which seat was booked and by which thread. If there are no more available seats,
+a message is printed indicating that the thread could not book a seat.

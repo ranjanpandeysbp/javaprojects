@@ -1,0 +1,92 @@
+The code defines a Java class BlockingQueueMain that demonstrates how to use the BlockingQueue
+interface and its implementation ArrayBlockingQueue to create a thread-safe queue that can be used
+to exchange data between two threads.
+
+The code creates a BlockingQueue of integers with a capacity of 10, and then creates two threads:
+1. one producer thread that adds 20 integers to the queue.
+2. one consumer thread that removes 20 integers from the queue.
+Both threads use the put() and take() methods of the BlockingQueue interface to add and remove items
+from the queue respectively.
+
+Java code defining a class named "Producer" that implements the "Runnable" interface. It has a private field "queue" of type "BlockingQueue<Integer>" and a constructor that takes a "BlockingQueue<Integer>" object as an argument to initialize the "queue" field.
+
+The "run()" method contains a for-loop that executes ten times.
+In each iteration, it tries to put the current value of "i" into the "queue" using the "put()" method,
+which blocks if the queue is full. It then prints a message to the console indicating that it has produced
+the value of "i". Finally, it sleeps for one second using the "Thread.sleep()" method.
+If an "InterruptedException" is caught, it prints the stack trace.
+
+import java.util.concurrent.BlockingQueue;
+
+public class Producer implements Runnable {
+
+    private final BlockingQueue<Integer> queue;
+
+    public Producer(BlockingQueue<Integer> queue) {
+        this.queue = queue;
+    }
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            try {
+                queue.put(i);
+                System.out.println("Produced: " + i);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+Java code defining a class named "Consumer" that also implements the "Runnable" interface.
+It has a private field "queue" of type "BlockingQueue<Integer>" and a constructor that takes a
+"BlockingQueue<Integer>" object as an argument to initialize the "queue" field.
+
+The "run()" method contains a for-loop that executes ten times. In each iteration, it tries to
+take a value from the "queue" using the "take()" method, which blocks if the queue is empty.
+It then prints a message to the console indicating that it has consumed the value.
+Finally, it sleeps for two seconds using the "Thread.sleep()" method.
+If an "InterruptedException" is caught, it prints the stack trace.
+
+public class Consumer implements Runnable {
+
+    private final BlockingQueue<Integer> queue;
+
+    public Consumer(BlockingQueue<Integer> queue) {
+        this.queue = queue;
+    }
+
+    public void run() {
+        for (int i = 0; i < 10; i++) {
+            try {
+                int value = queue.take();
+                System.out.println("Consumed: " + value);
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+
+The start() method is called on both threads to start their execution, and the join() method is called on
+both threads to wait for their completion before exiting the program.
+During the execution, the producer thread adds integers to the queue and the consumer thread removes them,
+printing out the values that are produced and consumed.
+The InterruptedException is handled by printing out the stack trace.
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class BlockingQueueMain {
+
+    public static void main(String[] args) {
+        BlockingQueue<Integer> queue = new LinkedBlockingQueue<>(5);
+        Thread producer = new Thread(new Producer(queue));
+        Thread consumer = new Thread(new Consumer(queue));
+        producer.start();
+        consumer.start();
+    }
+}

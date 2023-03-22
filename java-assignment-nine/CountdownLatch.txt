@@ -1,0 +1,68 @@
+This is a Java code defining a class named "CountdownLatchMain" that contains a main method.
+
+The main method creates a "CountDownLatch" object with a count of three and passes it as an argument to three
+"MyTask" objects, each running on its own thread.
+
+Class named "MyTask" that implements the "Runnable" interface.
+It has a private field "latch" of type "CountDownLatch" and a constructor that takes a "CountDownLatch"
+object as an argument to initialize the "latch" field.
+
+The "run()" method prints a message to the console indicating that the thread has started executing.
+It then sleeps for two seconds using the "Thread.sleep()" method.
+If an "InterruptedException" is caught, it prints the stack trace to the console.
+
+After the sleep, the "run()" method prints a message to the console indicating that the thread has completed
+execution. Finally, it calls the "countDown()" method on the "CountDownLatch" object, which decrements the
+count by one.
+
+import java.util.concurrent.CountDownLatch;
+
+public class MyTask implements Runnable {
+
+    private final CountDownLatch latch;
+
+    public MyTask(CountDownLatch latch) {
+        this.latch = latch;
+    }
+
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " started");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName() + " completed");
+        latch.countDown();
+    }
+}
+
+The main method then starts all three threads using the "start()" method.
+After that, it calls the "await()" method on the "CountDownLatch" object, which will block the main thread
+until the count reaches zero.
+
+Once the count reaches zero, the main thread continues executing and prints the message "All tasks completed"
+to the console. If an "InterruptedException" is caught while waiting for the count to reach zero,
+it prints the stack trace to the console.
+
+import java.util.concurrent.CountDownLatch;
+
+public class CountdownLatchMain {
+
+    public static void main(String[] args) {
+        CountDownLatch latch = new CountDownLatch(3);
+        Thread t1 = new Thread(new MyTask(latch));
+        Thread t2 = new Thread(new MyTask(latch));
+        Thread t3 = new Thread(new MyTask(latch));
+        t1.start();
+        t2.start();
+        t3.start();
+
+        try {
+            latch.await();
+            System.out.println("All tasks completed");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}

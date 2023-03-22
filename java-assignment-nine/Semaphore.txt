@@ -1,0 +1,65 @@
+This is a Java code defining a class named "SemaphoreMain" that contains a main method.
+
+Create a class named "Worker" that implements the "Runnable" interface.
+The "Worker" class has two private fields: a "Semaphore" object and an integer "id".
+The constructor takes these two arguments to initialize the fields.
+
+The "run()" method of the "Worker" class acquires the "Semaphore" object by calling the "acquire()" method,
+which decrements the permit count of the semaphore.
+It then prints a message to the console indicating that the worker with the specified "id" has acquired
+the semaphore.
+
+After that, the "run()" method sleeps for one second using the "Thread.sleep()" method.
+If an "InterruptedException" is caught, it prints the stack trace to the console.
+
+Finally, the "run()" method prints a message to the console indicating that the worker with the specified
+"id" is releasing the semaphore, and releases the semaphore by calling the "release()" method,
+which increments the permit count of the semaphore.
+
+import java.util.concurrent.Semaphore;
+
+public class Worker implements Runnable {
+    private final Semaphore semaphore;
+    private final int id;
+
+    public Worker(Semaphore semaphore, int id) {
+        this.semaphore = semaphore;
+        this.id = id;
+    }
+
+    @Override
+    public void run() {
+        try {
+            semaphore.acquire();
+            System.out.println("Worker " + id + " acquired semaphore.");
+            Thread.sleep(1000);
+            System.out.println("Worker " + id + " releasing semaphore.");
+            semaphore.release();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+The main method creates a "Semaphore" object with a permit count of three.
+Then, the main method creates a for-loop that iterates five times, and in each iteration,
+it creates a new "Worker" object that takes the "Semaphore" object and an integer value "i" as arguments.
+Finally, it starts each "Worker" object on a new thread using the "start()" method.
+
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreMain {
+
+    public static void main(String[] args) {
+        Semaphore semaphore = new Semaphore(3);
+        for (int i = 1; i <= 5; i++) {
+            new Thread(new Worker(semaphore, i)).start();
+        }
+    }
+}
+
+
+
+This code demonstrates the use of a semaphore to limit the number of threads that can access a shared resource
+concurrently. In this case, the semaphore limits the maximum number of threads that can execute at the same
+time to three.

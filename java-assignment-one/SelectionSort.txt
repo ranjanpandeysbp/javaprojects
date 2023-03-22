@@ -1,0 +1,43 @@
+Selection sort is a simple sorting algorithm that works by repeatedly finding the minimum
+element from an unsorted list and swapping it with the first element of the list.
+It then considers the remaining unsorted portion of the list and repeats the process until
+the entire list is sorted. Selection sort has a time complexity of O(n^2) and is not
+typically used for large datasets due to its relatively poor performance compared to other
+sorting algorithms. However, it is easy to understand and implement,
+and is useful for small datasets.
+
+Create a class of SelectionSort with the above logic.
+
+public class SelectionSort {
+    public static int[] sort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (arr[j] < arr[minIndex]) {
+                    minIndex = j;
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+
+        return arr;
+    }
+}
+
+Since a static method is defined in the Main class you can call the method directly
+using the class name. Pass an array of Integers and display the result to print the sorted list.
+
+public class Main {
+
+    public static void main(String[] args){
+        int[] numbers = {11, 15, 8, 20, 12, 17, 25};
+
+        //Sorting using Selection Sort
+        int[] sortedArray = SelectionSort.sort(numbers);
+        System.out.println("Sorted array: " + Arrays.toString(sortedArray));
+
+    }
+}

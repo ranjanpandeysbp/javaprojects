@@ -1,0 +1,30 @@
+Find the minimum number within an integre array.
+Create an integer array numbers with some values.
+Use the Arrays.stream() method to convert the array to an IntStream, and then call the min()
+method on that stream to get the minimum value.
+Adding null and empty checks for exception handling and then it returns the MAX integer value.
+Return the number from the method.
+
+public class FindMinimumNumber {
+    public int findMinimumNumber(int[] numbers) {
+        int min = Integer.MAX_VALUE;
+        if(null != numbers && numbers.length > 0)
+            min = Arrays.stream(numbers).min().getAsInt();
+        return min;
+    }
+}
+
+Create a Main class and instantiate the object for FindMinimumNumber.
+Call the method findMinimumNumber and pass an array of integers.
+Finally, print out the result using System.out.println().
+
+public class Main {
+
+    public static void main(String[] args){
+        int[] numbers = {11, 15, 8, 20, 12, 17, 25};
+        //Find minimum number in array
+        FindMinimumNumber findMinimumNumber = new FindMinimumNumber();
+        int minimumNumber = findMinimumNumber.findMinimumNumber(numbers);
+        System.out.println("The minimum number is: " + minimumNumber);
+    }
+}
